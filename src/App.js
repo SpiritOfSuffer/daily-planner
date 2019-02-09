@@ -1,28 +1,56 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import ToDoItem from './components/ToDoItem';
+import { connect } from 'react-redux';
+import { TYPE } from './consts/'
 
 class App extends Component {
   render() {
+    const { todos, addToDo, deleteToDo } = this.props;
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        {this._renderTodos(todos, addToDo, deleteToDo)}
       </div>
     );
   }
+  _renderTodos(todos, addToDo, deleteToDo) {
+    return (
+    <ul>
+      {todos.map((todo, index) => 
+        <li key={index}>
+          <ToDoItem
+            title = {todo.get('title')}
+            description = {todo.get('description')}
+            priority = {todo.get('priority')}
+            onClickAdd={addToDo}
+            onClickDelete={deleteToDo}
+            first={index === 0}
+            index={index}
+          />
+        </li>
+      )}
+    </ul>
+    )
+  }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    todos: state.get('todos'),
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    addToDo: (payload) => dispatch({
+      type: TYPE.ADD_TODO,
+      payload
+    }),
+    deleteToDo: (payload) => dispatch({
+      type: TYPE.DELETE_TODO,
+      payload
+    }),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
