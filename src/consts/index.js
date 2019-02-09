@@ -4,9 +4,7 @@ import moment from 'moment';
 export const ToDoRecord  = Record({
     title: '',
     description: '',
-    deadline: '',
     priority: '',
-    completed: '',
     id: null,
 });
 

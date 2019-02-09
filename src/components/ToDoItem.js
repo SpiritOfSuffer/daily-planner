@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { TYPE } from '../consts'
 import { connect } from 'react-redux';
+import styled from 'styled-components'
+
 
 class ToDoItem extends Component {
   render() {
@@ -8,7 +10,7 @@ class ToDoItem extends Component {
     const first = index === 0;
     return (
       <div>
-          <input type="text" defaultValue={title} onChange={(e) => {
+          <Title type="text" defaultValue={title} onChange={(e) => {
               updateToDo({
               index,
               value: e.target.value,
@@ -17,14 +19,14 @@ class ToDoItem extends Component {
             }} 
           />
           <br />
-          <input type="text" defaultValue={description} />
+          <Description type="text" defaultValue={description} />
           <br />
-          <input type="text" defaultValue={priority} />
+          <Priority type="text" defaultValue={priority} />
           <br />
           {first ? (
-              <button onClick={addToDo}>Add</button>
+              <Button onClick={addToDo}>Add</Button>
           ) : (
-            <button onClick={() => deleteToDo(index)}>Delete</button>
+            <Button onClick={() => deleteToDo(index)}>Delete</Button>
           )}
       </div>
     );
@@ -54,5 +56,45 @@ function mapStateToProps(state, ownProps) {
         }),
     }
   }
+
+  
+const Title = styled.input`
+font-size: 24px;
+border-left: none;
+border-right: none;
+border-top: none;
+border-width: 2px;
+outline: none;
+`
+const Description = styled.input`
+font-size: 16px;
+border-left: none;
+border-right: none;
+border-top: none;
+border-width: 2px;
+outline: none;
+`
+const Priority = styled.input`
+font-size: 12px;
+border-left: none;
+border-right: none;
+border-top: none;
+border-width: 2px;
+outline: none;
+`
+const Button = styled.button`
+background-image: linear-gradient(to bottom, #14c296, #247c46);
+border-radius: 100px;
+font-family: "Segoe UI",Arial,sans-serif;
+color: #ffffff;
+padding: 10px 20px 24px 20px;
+border: none;
+cursor: pointer;
+height: 40px;
+font: "Segoe UI",Arial,sans-serif;
+font-size: 13px;
+font-weight: bold;
+margin-top: 10px;
+`
 
 export default connect(mapStateToProps, mapDispatchToProps)(ToDoItem);
