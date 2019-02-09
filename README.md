@@ -1,7 +1,7 @@
 
 ## About
 
-This is a small project, using React, Redux, React-Redux, Styled-Components
+This is a small project, using React, Redux, React-Redux, Immutable, Styled-Components
 
 ## Available Scripts
 
