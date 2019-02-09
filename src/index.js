@@ -7,7 +7,6 @@ import { Provider } from 'react-redux'
 import  { createStore } from 'redux'
 import reducer from './reducers/'
 import { StateRecord } from './consts/'
-//import reducer from './reducer'
 
 const initialState = new StateRecord();
 const store = createStore(reducer, initialState);
